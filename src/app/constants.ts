@@ -77,7 +77,9 @@ export function getMockupSceneUrl(productKey: string): string {
   if (!product) {
     throw new Error(`Unknown product key: ${productKey}`);
   }
-  return resolveAssetPath(`/${product.assetsFolderName}/textures/Material_baseColor.scene`);
+  return resolveAssetPath(
+    `/${product.assetsFolderName}/textures/Material_baseColor.scene`
+  );
 }
 
 /**

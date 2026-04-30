@@ -68,6 +68,7 @@ export function useMockupRenderer({
    * Builds placeholders object from exported design pages.
    */
   const buildPlaceholders = useCallback(async (cesdk: CreativeEditorSDK) => {
+    if (!cesdk?.engine) return {};
     const pages = cesdk.engine.block.findByKind('page');
 
     const pageBlobs = await Promise.all(

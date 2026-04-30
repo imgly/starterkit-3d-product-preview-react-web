@@ -25,6 +25,17 @@
 }
 
 /* ============================================================================
+   Fullscreen Mode
+   ============================================================================ */
+
+.fullscreen {
+  width: auto;
+  min-width: 0;
+  height: auto;
+  flex-grow: 1;
+}
+
+/* ============================================================================
    3D Model Viewer
    ============================================================================ */
 
@@ -84,6 +95,11 @@
 }
 
 .preview:hover .controls {
+  background: linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
+  opacity: 1;
+}
+
+.fullscreen .controls {
   background: linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
   opacity: 1;
 }
