@@ -6,6 +6,7 @@
  */
 
 import { useCallback, useEffect, useRef } from 'react';
+import classNames from 'classnames';
 import '@google/model-viewer';
 
 import type { ModelViewerElement } from '../types';
@@ -22,7 +23,8 @@ interface Mockup3DPreviewProps {
   cameraOrbit: string;
   baseColorTextureIndex: number;
   isLoading: boolean;
-  onDownload: () => void;
+  isFullscreen: boolean;
+  onToggleFullscreen: () => void;
 }
 
 // ============================================================================
@@ -35,7 +37,8 @@ export function Mockup3DPreview({
   cameraOrbit,
   baseColorTextureIndex,
   isLoading,
-  onDownload
+  isFullscreen,
+  onToggleFullscreen
 }: Mockup3DPreviewProps) {
   const modelViewerRef = useRef<ModelViewerElement>(null);
   const currentTextureUrlRef = useRef<string | null>(null);
@@ -83,13 +86,29 @@ export function Mockup3DPreview({
   // Update camera orbit when it changes
   useEffect(() => {
     const modelViewer = modelViewerRef.current;
-    if (modelViewer) {
-      modelViewer.cameraOrbit = cameraOrbit;
-    }
+    if (!modelViewer) return;
+    modelViewer.cameraOrbit = cameraOrbit;
+    modelViewer.jumpCameraToGoal?.();
   }, [cameraOrbit]);
 
+  // Handle Escape key to exit fullscreen
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isFullscreen) {
+        onToggleFullscreen();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [isFullscreen, onToggleFullscreen]);
+
   return (
-    <div className={styles.preview}>
+    <div
+      className={classNames(styles.preview, {
+        [styles.fullscreen]: isFullscreen
+      })}
+    >
       {/* Loading Indicator */}
       {isLoading && (
         <div className={styles.loadingIndicator}>
@@ -102,6 +121,7 @@ export function Mockup3DPreview({
         ref={modelViewerRef as React.RefObject<HTMLElement>}
         src={modelUrl}
         camera-controls
+        camera-orbit={cameraOrbit}
         shadow-intensity="1"
         style={{ width: '100%', height: '100%' }}
         onLoad={handleModelLoad}
@@ -109,14 +129,13 @@ export function Mockup3DPreview({
 
       {/* Preview Controls */}
       <div className={styles.controls}>
-        {/* Download */}
+        {/* Fullscreen Toggle */}
         <button
           className={styles.controlButton}
-          title="Download texture"
-          onClick={onDownload}
-          disabled={!mockupImageUrl}
+          title={isFullscreen ? 'Exit fullscreen' : 'View fullscreen'}
+          onClick={onToggleFullscreen}
         >
-          <Icon name="download" />
+          <Icon name={isFullscreen ? 'fullscreen-leave' : 'fullscreen'} />
         </button>
       </div>
     </div>

@@ -19,6 +19,7 @@ export interface ModelViewerElement extends HTMLElement {
   cameraOrbit: string;
   cameraControls: boolean;
   src: string;
+  jumpCameraToGoal?: () => void;
 }
 
 // Extend JSX.IntrinsicElements for model-viewer web component
@@ -30,6 +31,7 @@ declare global {
         React.HTMLAttributes<HTMLElement> & {
           src?: string;
           'camera-controls'?: boolean;
+          'camera-orbit'?: string;
           'shadow-intensity'?: string;
         },
         HTMLElement
