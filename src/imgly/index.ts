@@ -18,9 +18,10 @@
  * ```
  */
 
-import CreativeEditorSDK from '@cesdk/cesdk-js';
+import type CreativeEditorSDK from '@cesdk/cesdk-js';
 import {
   BlurAssetSource,
+  ImageColorsAssetSource,
   ColorPaletteAssetSource,
   CropPresetsAssetSource,
   DemoAssetSources,
@@ -64,6 +65,7 @@ export async function init3dProductPreviewEditor(
   await cesdk.addPlugin(new DesignEditorConfig());
 
   // Asset sources
+  await cesdk.addPlugin(new ImageColorsAssetSource());
   await cesdk.addPlugin(new ColorPaletteAssetSource());
   await cesdk.addPlugin(new TypefaceAssetSource());
   await cesdk.addPlugin(new TextAssetSource());
