@@ -14,6 +14,7 @@ import { Mockup3DPreview } from './Mockup3DPreview/Mockup3DPreview';
 import { PRODUCTS, getDesignSceneUrl, getModelUrl } from './constants';
 import styles from './App.module.css';
 
+
 // Default product to load on startup
 const DEFAULT_PRODUCT_KEY = 'apparel';
 
