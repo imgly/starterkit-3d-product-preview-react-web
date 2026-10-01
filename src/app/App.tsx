@@ -37,6 +37,7 @@ export default function App({ config }: AppProps) {
   const {
     mockupImageUrl,
     isLoading,
+    renderError,
     setEngineReady,
     renderMockupForProduct,
     resetMockupScene
@@ -100,6 +101,7 @@ export default function App({ config }: AppProps) {
     async (cesdk: CreativeEditorSDK) => {
       designEngineRef.current = cesdk;
 
+
       const sceneLoad = ++sceneLoadRef.current;
       await init3dProductPreviewEditor(cesdk);
 
@@ -151,12 +153,15 @@ export default function App({ config }: AppProps) {
           cameraOrbit={product.cameraOrbit}
           baseColorTextureIndex={product.baseColorTextureIndex}
           isLoading={isLoading}
+          renderError={renderError}
           isFullscreen={isFullscreen}
           onToggleFullscreen={handleToggleFullscreen}
         />
 
         <div
-          className={`${styles.editorWrapper} ${isFullscreen ? styles.hidden : ''}`}
+          className={`${styles.editorWrapper} ${
+            isFullscreen ? styles.hidden : ''
+          }`}
         >
           <CreativeEditor
             className={styles.editor}
