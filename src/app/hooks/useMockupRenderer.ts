@@ -138,6 +138,12 @@ export function useMockupRenderer({
       clearTimeout(debounceRef.current);
       pendingRenderRef.current = false;
 
+      // The preview textures whichever model has loaded, so a new product's
+      // model would otherwise get the old product's texture, whose URL the
+      // next render revokes while it may still be loading.
+      if (productKey !== productKeyRef.current) {
+        setMockupImageUrl(null);
+      }
       productKeyRef.current = productKey;
       sceneStringRef.current = sceneString;
 
