@@ -1,7 +1,6 @@
 {
   "name": "starterkit-3d-product-preview",
   "version": "1.0.0",
-  "type": "module",
   "description": "CE.SDK 3D Product Configurator Starterkit",
   "scripts": {
     "dev": "vite",
@@ -10,8 +9,8 @@
     "check:syntax": "tsc --noEmit"
   },
   "dependencies": {
-    "@cesdk/cesdk-js": "^1.86.2",
-    "@cesdk/engine": "^1.86.2",
+    "@cesdk/cesdk-js": "^1.85.4",
+    "@cesdk/engine": "^1.85.4",
     "@google/model-viewer": "^4.3.1",
     "classnames": "^2.3.2",
     "react": "^18.2.0",
@@ -22,8 +21,8 @@
     "@types/node": "^22.0.0",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
-    "@vitejs/plugin-react": "^6.1.2",
+    "@vitejs/plugin-react": "^4.2.0",
     "typescript": "^5.0.0",
-    "vite": "^8.3.4"
+    "vite": "^6.0.3"
   }
 }
