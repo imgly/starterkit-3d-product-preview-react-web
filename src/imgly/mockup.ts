@@ -106,7 +106,7 @@ export async function renderMockup(
       const url =
         source instanceof Blob
           ? (blobUrls.push(URL.createObjectURL(source)),
-            blobUrls[blobUrls.length - 1])
+            blobUrls[blobUrls.length - 1]!)
           : source;
 
       blocks.forEach((block) => {
